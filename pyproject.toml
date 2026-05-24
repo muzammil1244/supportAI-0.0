@@ -1,0 +1,18 @@
+[project]
+name = "supportai"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "fastapi>=0.136.3",
+    "langchain>=1.3.1",
+    "langchain-groq>=1.1.2",
+    "psycopg2-binary>=2.9.12",
+    "pwdlib[argon2]>=0.3.0",
+    "pydantic>=2.13.4",
+    "pyjwt>=2.13.0",
+    "python-dotenv>=1.2.2",
+    "sqlalchemy>=2.0.49",
+    "uvicorn>=0.47.0",
+]
