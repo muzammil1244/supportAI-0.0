@@ -19,3 +19,5 @@ def register_route(body: Userreq,db:Session = Depends(get_db) ):
 def login_route(body:User_login , db:Session = Depends(get_db)):
     return login(body,db)
 
+
+

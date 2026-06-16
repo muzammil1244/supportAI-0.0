@@ -4,10 +4,13 @@ from fastapi import HTTPException  , status
 import jwt
 from dotenv import load_dotenv
 import os
+from datetime import datetime, timedelta
+from src.celery.email_send import send_email
 # auth register controller
 
 load_dotenv()
 sec_key = os.getenv("SECRETE_KY")
+token_exp  = int(os.getenv("TOKEN_EXP"))
 hash_password = PasswordHash.recommended()
 
 
@@ -39,17 +42,16 @@ def register(body,db):
 
 
 
-   return {
-        "message":"register active"
-    }
+  
 
 
 # auth login controller
 def login(body,db):
     is_user = db.query(User).filter(User.email == body.email).first()
     if not is_user:
-        raise HTTPException(detail="email is not registerd" , status_code=status.HTTP_401_UNAUTHORIZED)
+        raise HTTPException(detail="email is not registered" , status_code=status.HTTP_401_UNAUTHORIZED)
    
+    
     is_correct_pass = hash_password.verify(body.password  ,is_user.password)
 
     if not is_correct_pass:
@@ -57,11 +59,14 @@ def login(body,db):
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="wrong password"
         )
+    send_email(to=is_user.email)
+    expire = datetime.utcnow() + timedelta(minutes=token_exp)
     
     payload = {
         "id": is_user.id,
         "role":is_user.email,
-        "exp":30
+        # "exp" : int(expire.timestamp())
+     
 
     }
 
