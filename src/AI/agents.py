@@ -5,7 +5,6 @@ from src.AI.db_opretions import *
 import os
 from dotenv import load_dotenv
 from langchain.agents import create_agent
-from langchain_chroma import Chroma
 from fastapi import HTTPException ,status
 from src.redis.connection import save_message
 from src.db.vector_db import vector_store

@@ -1,6 +1,4 @@
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_pinecone import PineconeVectorStore
 from langchain_core.documents import Document
 from fastapi import HTTPException, UploadFile
 import tempfile
