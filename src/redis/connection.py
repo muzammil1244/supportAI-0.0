@@ -8,6 +8,8 @@ redis_client = redis.Redis(
     host=os.getenv("REDIS_HOST"),
     port=int(os.getenv("REDIS_PORT")),
     db=int(os.getenv("REDIS_DB")),
+    username=os.getenv("REDIS_USERNAME"),
+    password=os.getenv("REDIS_PASSWORD"),
     decode_responses=True
 )
 

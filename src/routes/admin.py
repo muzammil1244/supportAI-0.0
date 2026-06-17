@@ -15,7 +15,7 @@ admin_route = APIRouter(
 
 
 @admin_route.post("/upload",status_code=status.HTTP_201_CREATED)
-async def upload_document_route(file_data:UploadFile = File()):
+async def upload_document_route(file_data:UploadFile = File(),user = Depends(is_admin)):
     return await  upload_controller(file_data)
         # return {"filenames": [f.filename for f in file_data]}
 
