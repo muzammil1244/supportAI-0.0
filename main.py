@@ -12,16 +12,16 @@ app = FastAPI(title="MyApp")
 
 # join routes
 
-# Base.metadata.create_all(bind=DB)
-# app.include_router(auth_router)
-# app.include_router(chat_route)
-# app.include_router(admin_route)
+Base.metadata.create_all(bind=DB)
+app.include_router(auth_router)
+app.include_router(chat_route)
+app.include_router(admin_route)
 
 
 
-@app.get("/")
-def home():
-    return {"message": "working"}
+# @app.get("/")
+# def home():
+#     return {"message": "working"}
 
 
 
