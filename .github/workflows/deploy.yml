@@ -24,7 +24,6 @@ jobs:
         
       - name: Server start karo
         run: |
-             cd backend
              uv run uvicorn main:app --host 0.0.0.0 --port 8000 &
               sleep 5 &
              uv run celery -A src.celery.celery_app worker     
