@@ -8,7 +8,7 @@ on:
 
 jobs:
   code-check:
-    runs-on : ubuntu-latest
+    run-on : ubuntu-latest
  
     steps:
       - name : checkout code 
