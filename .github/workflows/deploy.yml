@@ -21,12 +21,15 @@ jobs:
       
       - name : install dependency
         run : uv sync
+      - name: Env file banao
+        run: echo "${{ secrets.ENV_FILE }}" > .env
         
       - name: Server start karo
         run: |
-             uv run uvicorn main:app --host 0.0.0.0 --port 8000 &
-              sleep 5 &
-             uv run celery -A src.celery.celery_app worker     
+            uv run celery -A src.celery.celery_app worker & 
+            sleep 3                                           
+            uv run uvicorn main:app --host 0.0.0.0 --port 8000 &  
+            sleep 5                  
 
       - name: Server health check
         run: |
