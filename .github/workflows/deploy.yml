@@ -37,7 +37,7 @@ jobs:
   
   deployment :
     needs : code-check
-    runs-one: ubuntu-latest
+    runs-on: ubuntu-latest
 
     steps:
      
