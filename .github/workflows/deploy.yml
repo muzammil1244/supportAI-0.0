@@ -35,6 +35,28 @@ jobs:
         run: |
          curl http://localhost:8000/health
   
+  deployment :
+    needs : code-check
+    runs-one: ubuntu-latest
+
+    steps:
+     
+      - name : docker login
+        uses : docker/login-actions@3
+        with:
+          username: ${{ secrets.DOCKER_NAME }}
+          password: ${{ secrets.DOCKER_PASS }}
+      
+      - name : build docker image
+        uses : docker/build-push-action@v4
+        with:
+          context: .                              
+          push: true
+          tags: ${{ secrets.DOCKER_NAME }}/supportai:latest
+
+      - name: Render pe deploy karo
+        run: curl ${{ secrets.RENDER_DEPLOY_HOOK }}
+
 
 
     
