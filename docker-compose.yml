@@ -1,0 +1,18 @@
+version: '3.9'
+services:
+ 
+ fastapi:
+  container_name: fastapi_container
+  build: .
+  image: saasimg
+  env_file:
+   - .env
+  ports:
+    - "8000:8000"
+  
+ worker:
+  container_name: celery_worker
+  image: saasimg
+  command: uv run celery -A src.celery.celery_app worker --loglevel=info
+  env_file:
+    - .env
