@@ -29,7 +29,12 @@ jobs:
             uv run celery -A src.celery.celery_app worker & 
             sleep 3                                           
             uv run uvicorn main:app --host 0.0.0.0 --port 8000 &  
-            sleep 5                  
+            sleep 5                 
+             
+      - name: Debug - process check karo
+        run: |
+         ps aux | grep uvicorn
+         ps aux | grep celery
 
       - name: Server health check
         run: |
