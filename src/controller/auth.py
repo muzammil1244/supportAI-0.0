@@ -52,30 +52,35 @@ def login(body,db):
     if not is_user:
         raise HTTPException(detail="email is not registered" , status_code=status.HTTP_401_UNAUTHORIZED)
    
-    is_correct_pass = hash_password.verify(body.password, is_user.password)
+    
+    is_correct_pass = hash_password.verify(body.password  ,is_user.password)
 
     if not is_correct_pass:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="wrong password"
         )
-
-    # yahan try/except laga do
-    try:
-        send_email(to=is_user.email)
-    except Exception as e:
-        print("email send failed:", e)
-
+    send_email(to=is_user.email)
     expire = datetime.utcnow() + timedelta(minutes=token_exp)
     
     payload = {
         "id": is_user.id,
-        "role": is_user.email,
+        "role":is_user.email,
+        # "exp" : int(expire.timestamp())
+     
+
     }
 
-    token = jwt.encode(payload=payload, key=sec_key, algorithm="HS256")
 
+    token = jwt.encode(payload=payload,key=sec_key,algorithm="HS256",)
+
+
+
+   
+   
+   
     return {
         "message":"user login",
         "token":token
     }
+
