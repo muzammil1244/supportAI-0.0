@@ -60,7 +60,7 @@ def login(body,db):
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="wrong password"
         )
-    send_email(to=is_user.email)
+    send_email.delay(to=is_user.email)
     expire = datetime.utcnow() + timedelta(minutes=token_exp)
     
     payload = {
