@@ -35,6 +35,7 @@ def register(body,db):
 
     return {
         "message": "user register error"
+        ,"error" : e
     }
     
 
