@@ -2,12 +2,21 @@ from fastapi import FastAPI
 from src.routes.auth import auth_router
 from src.routes.chat import chat_route
 from src.routes.admin import admin_route
-
+from fastapi.middleware.cors import CORSMiddleware
 from src.model.user import User 
 from src.db.DataBase import Base,DB
 
 app = FastAPI(title="MyApp")
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+          "https://your-frontend.vercel.app",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 # join routes
