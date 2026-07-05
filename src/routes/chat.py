@@ -6,7 +6,7 @@ from src.controller.chat import chat_agent
 from src.helper.is_authanticat import is_authenticated
 from src.helper.chat_his import get_history
 from src.redis.connection import redis_client
-
+from src.controller.chat import user_profile
 
 
 
@@ -30,3 +30,7 @@ def test():
     return {
         "data": data
     }
+
+@chat_route.get("/profile")
+def profile_route(is_user : User_q = Depends(is_authenticated),db:Session = Depends(get_db)):
+  return  user_profile(is_user,db)
