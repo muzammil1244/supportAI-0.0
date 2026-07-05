@@ -85,7 +85,7 @@ def RAG_search(state):
         # print("ruf result of rag : ",result)
 
         answer = []
-        for doc, score in result:
+        for doc in result:
             # print("SCORE:", score)
             # print(doc.page_content[:500])
             # print("="*50)
@@ -374,9 +374,11 @@ user_id: {state.user_id}
         }
 
     except Exception as e:
+       
          return {
-        "ans":f" issue: {str(e)}"
-    }
+            "ans": [f"issue: {str(e)}"]   # list mein wrap kiya
+        }
+    
 
 
 def LLM_search(state):
@@ -411,7 +413,7 @@ def LLM_search(state):
         }
     except Exception as e :
         raise HTTPException(
-            statuc_code = status.HTTP_500_INTERNAL_SERVER_ERROR,
+            status_code = status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"error from llm search detail : {str(e)}"
         )
        
