@@ -13,7 +13,9 @@ def read_appointments_controller(db):
     "name" :user.name,
     "description" : user.description,
     "date" : user.date,
-    "doctor" :user.doctor
+    "doctor" :user.doctor,
+    "number" : user.number,
+    "create_at":user.create_date
 
     }
     for user in data
