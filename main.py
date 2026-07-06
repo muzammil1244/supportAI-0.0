@@ -11,7 +11,7 @@ app = FastAPI(title="MyApp")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-          "https://supportai-0-0.onrender.com/",
+          "https://saasai-f.onrender.com/",
     ],
     allow_credentials=True,
     allow_methods=["*"],
