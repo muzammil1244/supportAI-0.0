@@ -11,7 +11,6 @@ app = FastAPI(title="MyApp")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:5173",
           "https://supportai-0-0.onrender.com/",
     ],
     allow_credentials=True,
