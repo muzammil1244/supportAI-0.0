@@ -8,16 +8,18 @@ from src.db.DataBase import Base,DB
 
 app = FastAPI(title="MyApp")
 
+origins = [
+    "https://saasai-f.onrender.com",  # Sahi url bina aakhiri '/' ke
+    "http://localhost:5173"           # Localhost agar test karna ho
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-          "https://saasai-f.onrender.com/",
-    ],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 
 # join routes
 
